@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b287e611daaf146989a56b03da1ccd, type: 3}
+  m_Name: Y Not Robots^2 6780 Start Position ScriptableObject
+  m_EditorClassIdentifier: 
+  robot: 0
+  robotPrefab: {fileID: 4727357523244457003, guid: 7916c52d62bc34b499a1e2ed9125f8d3, type: 3}
+  redFront:
+    position: {x: -0.09, y: -0.1, z: 0}
+    rotation: {x: 0, y: 180, z: 0, w: 0}
+    yellowPixel:
+      usePixel: 0
+      pixelPosition: {x: -0.1, y: -0.1, z: -0.15}
+      pixelRotation: {x: 0, y: 0, z: 0, w: 0}
+    purplePixel:
+      usePixel: 0
+      pixelPosition: {x: -0.1, y: -0.98, z: -0.15}
+      pixelRotation: {x: 0, y: 0, z: 0, w: 0}
+  redBack:
+    position: {x: -0.1, y: -0.1, z: 0.085}
+    rotation: {x: 0, y: 180, z: 0, w: 0}
+    yellowPixel:
+      usePixel: 0
+      pixelPosition: {x: 0, y: -0.1, z: -0.175}
+      pixelRotation: {x: 0, y: 0, z: 0, w: 0}
+    purplePixel:
+      usePixel: 0
+      pixelPosition: {x: 0, y: -0.98, z: -0.175}
+      pixelRotation: {x: 0, y: 0, z: 0, w: 0}
+  blueFront:
+    position: {x: 0.1, y: -0.1, z: 0}
+    rotation: {x: 0, y: 180, z: 0, w: 0}
+    yellowPixel:
+      usePixel: 0
+      pixelPosition: {x: 0.1, y: -0.1, z: -0.15}
+      pixelRotation: {x: 0, y: 0, z: 0, w: 0}
+    purplePixel:
+      usePixel: 0
+      pixelPosition: {x: 0.1, y: -0.98, z: -0.15}
+      pixelRotation: {x: 0, y: 0, z: 0, w: 0}
+  blueBack:
+    position: {x: 0.1, y: -0.1, z: 0.085}
+    rotation: {x: 0, y: 180, z: 0, w: 0}
+    yellowPixel:
+      usePixel: 0
+      pixelPosition: {x: 0, y: -0.1, z: -0.175}
+      pixelRotation: {x: 0, y: 0, z: 0, w: 0}
+    purplePixel:
+      usePixel: 0
+      pixelPosition: {x: 0, y: -0.98, z: -0.175}
+      pixelRotation: {x: 0, y: 0, z: 0, w: 0}
