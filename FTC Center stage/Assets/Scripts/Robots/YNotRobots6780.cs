@@ -4,8 +4,6 @@ using System.Threading.Tasks;
 
 using UnityEngine;
 
-using static YNotRobots6780;
-
 public class YNotRobots6780 : _BaseRobot
 {
 
@@ -24,15 +22,23 @@ public class YNotRobots6780 : _BaseRobot
     }
 
 
+    // Elevator
     private const float ELEVATOR_SPEED = 0.64f; // meters Per Seconds
     private const float OUT_ELEVATOR_POSITION = 0.245f;
     private const int UP_ELEVATOR_ROTATION = -30;
     private const int HOVER_ELEVATOR_ROTATION = -5;
     private const int DOWN_ELEVATOR_ROTATION = 0;
     private const float ELEVATOR_ROTATION_TIME = 1;
-    private const float INTAKE_SPEED = 360;
+
+    // Intake
+    private const float INTAKE_SPEED = 3600;
     private const float INTAKE_HINGE_TIME = 1f;
-    private static readonly Vector3 INTAKE_HINGE_TARGET_POSITION = new Vector3(0, 0, -1);
+
+    // Bucket
+    private const int UP_BUCKET_ROTATION = 0;
+    private const int DOWN_BUCKET_ROTATION = 100;
+    private const float BUCKET_ROTATION_TIME = 0.5f;
+
 
 
 
@@ -77,6 +83,13 @@ public class YNotRobots6780 : _BaseRobot
     private float startIntakeRotation = -150;
 
 
+    [Header("Bucket")]
+    [SerializeField] private Transform bucketHinge;
+    private bool isBucketUp = true;
+    private float startBucketRotation;
+    private float bucketRotation;
+    private float elapsedBucketRotationTime;
+
 
 
     private async void Awake()
@@ -104,9 +117,11 @@ public class YNotRobots6780 : _BaseRobot
         RotateElevator();
         RotateIntake();
         MoveIntakeDown();
+        RotateBucket();
 
         elapsedElevatorRotationTime += Time.deltaTime;
         elapsedIntakeRotationTime += Time.deltaTime;
+        elapsedBucketRotationTime += Time.deltaTime;
     }
     private void FixedUpdate()
     {
@@ -164,6 +179,20 @@ public class YNotRobots6780 : _BaseRobot
         startElevatorRotation = elevatorRotation;
     }
 
+    public void BucketUp()
+    {
+        startBucketRotation = bucketRotation;
+        elapsedBucketRotationTime = 0;
+        isBucketUp = true;
+    }
+
+    public void BucketDown()
+    {
+        startBucketRotation = bucketRotation;
+        elapsedBucketRotationTime = 0;
+        isBucketUp = false;
+    }
+
 
 
     private void PushBot_OnPositionDecided(StartingSpot startingSpot)
@@ -192,26 +221,36 @@ public class YNotRobots6780 : _BaseRobot
 
     private IEnumerator RunRedBackAutonomous()
     {
+        yield return AutonomousAction(1, WinchDown);
         yield return AutonomousAction(20, null);
-        yield return AutonomousAction(20, Move, Vector3.left);
+        yield return AutonomousAction(10, Move, Vector3.left);
         yield return AutonomousAction(10, null);
-        yield return AutonomousAction(87, Move, Vector3.forward);
-        yield return AutonomousAction(10, null);
-        yield return AutonomousAction(50, Move, Vector3.left);
+        yield return AutonomousAction(35, Move, Vector3.forward);
+        yield return AutonomousAction(25, null);
+        yield return AutonomousAction(15, Move, Vector3.left);
         yield return AutonomousAction(1, WinchUp);
         yield return AutonomousAction(74, null);
         yield return AutonomousAction(125, SetElevatorStage, ElevatorStage.Stage2);
-        yield return AutonomousAction(60, null); // Bucket Down
-        yield return AutonomousAction(20, null); // Bucket Up
+        yield return AutonomousAction(1, BucketDown);
+        yield return AutonomousAction(59, null);
+        yield return AutonomousAction(1, BucketUp);
         yield return AutonomousAction(125, SetElevatorStage, ElevatorStage.Stage0);
         yield return AutonomousAction(1, WinchDown);
         yield return AutonomousAction(74, null);
         yield return AutonomousAction(47, Move, Vector3.right);
         yield return AutonomousAction(43, Move, Vector3.forward);
+        yield return AutonomousAction(1, ToggleIntake);
+        yield return AutonomousAction(2999, null);
     }
 
     private IEnumerator RunRedFrontAutonomous()
     {
+        yield return AutonomousAction(1, WinchUp);
+        yield return AutonomousAction(50, null);;
+        yield return AutonomousAction(1, ToggleIntake);
+        yield return AutonomousAction(100000000, null);
+        
+        /*
         yield return AutonomousAction(20, null);
         yield return AutonomousAction(20, Move, Vector3.left);
         yield return AutonomousAction(10, null);
@@ -227,7 +266,7 @@ public class YNotRobots6780 : _BaseRobot
         yield return AutonomousAction(1, WinchDown);
         yield return AutonomousAction(74, null);
         yield return AutonomousAction(47, Move, Vector3.right);
-        yield return AutonomousAction(43, Move, Vector3.forward);
+        yield return AutonomousAction(43, Move, Vector3.forward);*/
     }
 
     private IEnumerator RunBlueBackAutonomous()
@@ -429,7 +468,9 @@ public class YNotRobots6780 : _BaseRobot
     {
         if (isIntakeOn)
         {
-            intake.localRotation = Quaternion.Euler(intake.localEulerAngles.x + (INTAKE_SPEED * Time.deltaTime), 0, 0);
+            //intake.localRotation = Quaternion.Euler(intake.localEulerAngles.x + (INTAKE_SPEED * Time.deltaTime), 0, 0);
+
+            intake.Rotate(Vector3.right, INTAKE_SPEED * Time.deltaTime);
         }
     }
 
@@ -437,10 +478,7 @@ public class YNotRobots6780 : _BaseRobot
     {
         if (isIntakeMovingDown)
         {
-            // intakeHinge.forward = Vector3.Slerp(intakeHinge.forward, INTAKE_HINGE_TARGET_POSITION, Time.deltaTime);
-
-
-            IntakeRotation = Mathf.Lerp(startIntakeRotation, 0, (float)(elapsedIntakeRotationTime * INTAKE_HINGE_TIME));
+            IntakeRotation = Mathf.Lerp(startIntakeRotation, 0, (float)(elapsedIntakeRotationTime / INTAKE_HINGE_TIME));
             intakeHinge.forward = Quaternion.AngleAxis(IntakeRotation, transform.right) * transform.forward;
 
             if (intakeHinge.localEulerAngles.x < 0)
@@ -448,6 +486,24 @@ public class YNotRobots6780 : _BaseRobot
                 intakeHinge.forward = transform.forward;
                 isIntakeMovingDown = false;
             }
+        }
+    }
+
+    private void RotateBucket()
+    {
+        if (isBucketUp)
+        {
+            RotateBucketToRotation(UP_BUCKET_ROTATION);
+        }
+        else
+        {
+            RotateBucketToRotation(DOWN_BUCKET_ROTATION);
+        }
+
+        void RotateBucketToRotation(float rotation)
+        {
+            bucketRotation = Mathf.Lerp(startBucketRotation, rotation, Mathf.Abs(rotation - startBucketRotation) / 30f * (float)(elapsedBucketRotationTime / BUCKET_ROTATION_TIME));
+            bucketHinge.forward = Quaternion.AngleAxis(bucketRotation, elevatorHinge.right) * elevatorHinge.forward;
         }
     }
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Y Not Robots^2 6780 Start Position ScriptableObject
   m_EditorClassIdentifier: 
   robot: 0
-  robotPrefab: {fileID: 4727357523244457003, guid: 7916c52d62bc34b499a1e2ed9125f8d3, type: 3}
+  robotPrefab: {fileID: 9063269136645999756, guid: ffe13241335a19842bdbf8afe1e320e2, type: 3}
   redFront:
     position: {x: -0.09, y: -0.1, z: 0}
     rotation: {x: 0, y: 180, z: 0, w: 0}
@@ -29,12 +29,12 @@ MonoBehaviour:
     position: {x: -0.1, y: -0.1, z: 0.085}
     rotation: {x: 0, y: 180, z: 0, w: 0}
     yellowPixel:
-      usePixel: 0
-      pixelPosition: {x: 0, y: -0.1, z: -0.175}
+      usePixel: 1
+      pixelPosition: {x: -0.035, y: -0.085, z: 0}
       pixelRotation: {x: 0, y: 0, z: 0, w: 0}
     purplePixel:
-      usePixel: 0
-      pixelPosition: {x: 0, y: -0.98, z: -0.175}
+      usePixel: 1
+      pixelPosition: {x: -0.15, y: -0.085, z: 0}
       pixelRotation: {x: 0, y: 0, z: 0, w: 0}
   blueFront:
     position: {x: 0.1, y: -0.1, z: 0}

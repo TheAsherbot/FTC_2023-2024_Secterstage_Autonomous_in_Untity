@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0de965f2e710c1c489ead8e62cd25da0, type: 3}
+  m_Name: Ramps to go under Truss Right Painting Data
+  m_EditorClassIdentifier: 
+  hullData: {fileID: 11400000, guid: 58ae7b324ed1dd0459dc04d49ce102f8, type: 2}
+  sourceMesh: {fileID: -5644040884594308651, guid: e1f744ab7d5659d4b809461523c79072, type: 3}
+  sourceMeshHash:
+    data: f334e842dfc0d0428c5b2c9ac772fc204b2991e3
+  activeHull: 0
+  faceThickness: 0.1
+  hulls:
+  - name: Hull 1
+    isVisible: 1
+    type: 1
+    colour: {r: 0, g: 1, b: 1, a: 0.7}
+    material: {fileID: 0}
+    enableInflation: 0
+    inflationAmount: 0.01
+    boxFitMethod: 1
+    maxPlanes: 255
+    isTrigger: 0
+    isChildCollider: 1
+    selectedFaces: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000
+    cachedTriangleVertices:
+    - {x: 0.003048, y: -0.003048, z: -0.003048}
+    - {x: 0.003048, y: 0.003048, z: 0.003048}
+    - {x: 0.003048, y: -0.003048, z: 0.003048}
+    - {x: 0.003048, y: -0.003048, z: -0.003048}
+    - {x: 0.003048, y: 0.003048, z: -0.003048}
+    - {x: 0.003048, y: 0.003048, z: 0.003048}
+    - {x: 0.003048, y: 0.003048, z: -0.003048}
+    - {x: 0.003048, y: 0.021261537, z: -0.003048}
+    - {x: 0.003048, y: 0.003048, z: 0.003048}
+    - {x: -0.003048, y: 0.003048, z: -0.003048}
+    - {x: -0.003048, y: -0.003048, z: -0.003048}
+    - {x: -0.003048, y: -0.003048, z: 0.003048}
+    - {x: -0.003048, y: 0.003048, z: -0.003048}
+    - {x: -0.003048, y: -0.003048, z: 0.003048}
+    - {x: -0.003048, y: 0.003048, z: 0.003048}
+    - {x: -0.003048, y: 0.003048, z: 0.003048}
+    - {x: -0.003048, y: 0.021261537, z: -0.003048}
+    - {x: -0.003048, y: 0.003048, z: -0.003048}
+    - {x: -0.003048, y: -0.003048, z: -0.003048}
+    - {x: 0.003048, y: -0.003048, z: -0.003048}
+    - {x: 0.003048, y: -0.003048, z: 0.003048}
+    - {x: -0.003048, y: -0.003048, z: -0.003048}
+    - {x: 0.003048, y: -0.003048, z: 0.003048}
+    - {x: -0.003048, y: -0.003048, z: 0.003048}
+    - {x: 0.003048, y: 0.003048, z: -0.003048}
+    - {x: 0.003048, y: -0.003048, z: -0.003048}
+    - {x: -0.003048, y: -0.003048, z: -0.003048}
+    - {x: 0.003048, y: 0.003048, z: -0.003048}
+    - {x: -0.003048, y: -0.003048, z: -0.003048}
+    - {x: -0.003048, y: 0.003048, z: -0.003048}
+    - {x: -0.003048, y: 0.003048, z: -0.003048}
+    - {x: 0.003048, y: 0.021261537, z: -0.003048}
+    - {x: 0.003048, y: 0.003048, z: -0.003048}
+    - {x: -0.003048, y: 0.003048, z: -0.003048}
+    - {x: -0.003048, y: 0.021261537, z: -0.003048}
+    - {x: 0.003048, y: 0.021261537, z: -0.003048}
+    - {x: -0.003048, y: 0.003048, z: 0.003048}
+    - {x: -0.003048, y: -0.003048, z: 0.003048}
+    - {x: 0.003048, y: -0.003048, z: 0.003048}
+    - {x: -0.003048, y: 0.003048, z: 0.003048}
+    - {x: 0.003048, y: -0.003048, z: 0.003048}
+    - {x: 0.003048, y: 0.003048, z: 0.003048}
+    - {x: 0.003048, y: 0.003048, z: 0.003048}
+    - {x: 0.003048, y: 0.021261537, z: -0.003048}
+    - {x: -0.003048, y: 0.021261537, z: -0.003048}
+    - {x: 0.003048, y: 0.003048, z: 0.003048}
+    - {x: -0.003048, y: 0.021261537, z: -0.003048}
+    - {x: -0.003048, y: 0.003048, z: 0.003048}
+    collisionMesh: {fileID: -55307140834609975, guid: 58ae7b324ed1dd0459dc04d49ce102f8, type: 2}
+    faceCollisionMesh: {fileID: 0}
+    faceBoxCenter: {x: 0, y: 0, z: 0}
+    faceBoxSize: {x: 0, y: 0, z: 0}
+    faceAsBoxRotation: {x: 0, y: 0, z: 0, w: 0}
+    autoMeshes: []
+    hasColliderError: 0
+    numColliderFaces: 12
+    noInputError: 0
+  autoHullPreset: 1
+  vhacdParams:
+    concavity: 0.001
+    alpha: 0.05
+    beta: 0.05
+    minVolumePerCH: 0.0001
+    resolution: 100000
+    maxNumVerticesPerCH: 64
+    planeDownsampling: 4
+    convexhullDownsampling: 4
+    pca: 0
+    mode: 0
+    convexhullApproximation: 1
+    oclAcceleration: 0
+    maxConvexHulls: 1024
+    projectHullVertices: 1
+  hasLastVhacdTimings: 0
+  lastVhacdPreset: 1
+  lastVhacdDurationSecs: 0
+  suppressMeshModificationWarning: 0
