@@ -31,13 +31,14 @@ public class YNotRobots6780 : _BaseRobot
     private const float ELEVATOR_ROTATION_TIME = 1;
 
     // Intake
-    private const float INTAKE_SPEED = 3600;
+    private const float INTAKE_SPEED = 360;
     private const float INTAKE_HINGE_TIME = 1f;
+    private const float INTAKE_FORCE = 0.5f;
 
     // Bucket
     private const int UP_BUCKET_ROTATION = 0;
     private const int DOWN_BUCKET_ROTATION = 100;
-    private const float BUCKET_ROTATION_TIME = 0.5f;
+    private const float BUCKET_ROTATION_TIME = 1f;
 
 
 
@@ -70,6 +71,7 @@ public class YNotRobots6780 : _BaseRobot
 
 
     [Header("Intake")]
+    [SerializeField] private IntakeTrigger intakeTrigger;
     [SerializeField] private Transform intakeHinge;
     [SerializeField] private Transform intake;
     private bool isIntakeOn;
@@ -96,12 +98,20 @@ public class YNotRobots6780 : _BaseRobot
     {
         OnPositionDecided += PushBot_OnPositionDecided;
 
+
         rigidbody = GetComponent<Rigidbody>();
+
+
+        intakeTrigger.OnTrigger += OnIntakeTrigger;
+        
+
 
         await Task.Delay(250);
 
         startY = transform.position.y;
     }
+
+
     private void Start()
     {
         RunAutonomous();
@@ -245,12 +255,18 @@ public class YNotRobots6780 : _BaseRobot
 
     private IEnumerator RunRedFrontAutonomous()
     {
+
         yield return AutonomousAction(1, WinchUp);
-        yield return AutonomousAction(50, null);;
+        yield return AutonomousAction(50, null);
+        yield return AutonomousAction(1, WinchDown);
+        yield return AutonomousAction(50, null);
         yield return AutonomousAction(1, ToggleIntake);
+        yield return AutonomousAction(30, Move, Vector3.forward);
         yield return AutonomousAction(100000000, null);
         
-        /*
+        
+/*
+        yield return AutonomousAction(1, WinchUp);
         yield return AutonomousAction(20, null);
         yield return AutonomousAction(20, Move, Vector3.left);
         yield return AutonomousAction(10, null);
@@ -266,7 +282,8 @@ public class YNotRobots6780 : _BaseRobot
         yield return AutonomousAction(1, WinchDown);
         yield return AutonomousAction(74, null);
         yield return AutonomousAction(47, Move, Vector3.right);
-        yield return AutonomousAction(43, Move, Vector3.forward);*/
+        yield return AutonomousAction(43, Move, Vector3.forward);
+*/
     }
 
     private IEnumerator RunBlueBackAutonomous()
@@ -459,7 +476,7 @@ public class YNotRobots6780 : _BaseRobot
 
         void RotateElevatorToRotation(float rotation)
         {
-            elevatorRotation = Mathf.Lerp(startElevatorRotation, rotation, Mathf.Abs(rotation - startElevatorRotation) / 30f * (float)(elapsedElevatorRotationTime * ELEVATOR_ROTATION_TIME));
+            elevatorRotation = Mathf.Lerp(startElevatorRotation, rotation, (float)(elapsedElevatorRotationTime * ELEVATOR_ROTATION_TIME) / ((float)Mathf.Abs(rotation - startElevatorRotation) / 30f));
             elevatorHinge.forward = Quaternion.AngleAxis(elevatorRotation, transform.right) * transform.forward;
         }
     }
@@ -507,6 +524,17 @@ public class YNotRobots6780 : _BaseRobot
         }
     }
 
+
+    private void OnIntakeTrigger(GameObject other)
+    {
+        if (other.CompareTag("Pixel"))
+        {
+            if (isIntakeOn)
+            {
+                other.GetComponentInParent<Rigidbody>().AddForce((new Vector3(0, 0.15f, 0) + -transform.forward).normalized * INTAKE_FORCE, ForceMode.Impulse);
+            }
+        }
+    }
 
 
 }
