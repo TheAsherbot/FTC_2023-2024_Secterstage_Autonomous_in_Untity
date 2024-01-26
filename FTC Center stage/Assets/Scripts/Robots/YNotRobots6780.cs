@@ -232,12 +232,12 @@ public class YNotRobots6780 : _BaseRobot
     private IEnumerator RunRedBackAutonomous()
     {
         yield return AutonomousAction(1, WinchDown);
-        yield return AutonomousAction(20, null);
+        yield return AutonomousAction(850, null);
         yield return AutonomousAction(10, Move, Vector3.left);
         yield return AutonomousAction(10, null);
-        yield return AutonomousAction(35, Move, Vector3.forward);
+        yield return AutonomousAction(52, Move, Vector3.forward);
         yield return AutonomousAction(25, null);
-        yield return AutonomousAction(15, Move, Vector3.left);
+        yield return AutonomousAction(24, Move, Vector3.left);
         yield return AutonomousAction(1, WinchUp);
         yield return AutonomousAction(74, null);
         yield return AutonomousAction(125, SetElevatorStage, ElevatorStage.Stage2);
@@ -247,81 +247,74 @@ public class YNotRobots6780 : _BaseRobot
         yield return AutonomousAction(125, SetElevatorStage, ElevatorStage.Stage0);
         yield return AutonomousAction(1, WinchDown);
         yield return AutonomousAction(74, null);
-        yield return AutonomousAction(47, Move, Vector3.right);
-        yield return AutonomousAction(43, Move, Vector3.forward);
-        yield return AutonomousAction(1, ToggleIntake);
-        yield return AutonomousAction(2999, null);
+        yield return AutonomousAction(27, Move, Vector3.right);
+        yield return AutonomousAction(25, Move, Vector3.forward);
     }
 
     private IEnumerator RunRedFrontAutonomous()
     {
-
-        yield return AutonomousAction(1, WinchUp);
-        yield return AutonomousAction(50, null);
         yield return AutonomousAction(1, WinchDown);
-        yield return AutonomousAction(50, null);
-        yield return AutonomousAction(1, ToggleIntake);
-        yield return AutonomousAction(30, Move, Vector3.forward);
-        yield return AutonomousAction(100000000, null);
-        
-        
-/*
-        yield return AutonomousAction(1, WinchUp);
-        yield return AutonomousAction(20, null);
-        yield return AutonomousAction(20, Move, Vector3.left);
         yield return AutonomousAction(10, null);
-        yield return AutonomousAction(55, Move, Vector3.forward);
+        yield return AutonomousAction(10, Move, Vector3.left);
         yield return AutonomousAction(10, null);
-        yield return AutonomousAction(50, Move, Vector3.left);
+        yield return AutonomousAction(28, Move, Vector3.forward);
+        yield return AutonomousAction(10, null);
+        yield return AutonomousAction(24, Move, Vector3.left);
         yield return AutonomousAction(1, WinchUp);
         yield return AutonomousAction(74, null);
         yield return AutonomousAction(125, SetElevatorStage, ElevatorStage.Stage2);
-        yield return AutonomousAction(60, null); // Bucket Down
-        yield return AutonomousAction(20, null); // Bucket Up
+        yield return AutonomousAction(1, BucketDown);
+        yield return AutonomousAction(59, null);
+        yield return AutonomousAction(1, BucketUp);
         yield return AutonomousAction(125, SetElevatorStage, ElevatorStage.Stage0);
         yield return AutonomousAction(1, WinchDown);
         yield return AutonomousAction(74, null);
-        yield return AutonomousAction(47, Move, Vector3.right);
-        yield return AutonomousAction(43, Move, Vector3.forward);
-*/
+        yield return AutonomousAction(25, Move, Vector3.left);
+        yield return AutonomousAction(25, Move, Vector3.forward);
     }
 
     private IEnumerator RunBlueBackAutonomous()
     {
-        yield return AutonomousAction(20, null);
-        yield return AutonomousAction(20, Move, Vector3.right);
+        yield return AutonomousAction(1, WinchDown);
+        yield return AutonomousAction(850, null);
+        yield return AutonomousAction(10, Move, Vector3.right);
         yield return AutonomousAction(10, null);
-        yield return AutonomousAction(87, Move, Vector3.forward);
-        yield return AutonomousAction(10, null);
-        yield return AutonomousAction(50, Move, Vector3.right);
-        yield return AutonomousAction(75, WinchUp);
+        yield return AutonomousAction(52, Move, Vector3.forward);
+        yield return AutonomousAction(25, null);
+        yield return AutonomousAction(24, Move, Vector3.right);
+        yield return AutonomousAction(1, WinchUp);
+        yield return AutonomousAction(74, null);
         yield return AutonomousAction(125, SetElevatorStage, ElevatorStage.Stage2);
-        yield return AutonomousAction(60, null); // Bucket Down
-        yield return AutonomousAction(20, null); // Bucket Up
+        yield return AutonomousAction(1, BucketDown);
+        yield return AutonomousAction(59, null);
+        yield return AutonomousAction(1, BucketUp);
         yield return AutonomousAction(125, SetElevatorStage, ElevatorStage.Stage0);
-        yield return AutonomousAction(75, WinchDown);
-        yield return AutonomousAction(47, Move, Vector3.right);
-        yield return AutonomousAction(43, Move, Vector3.forward);
+        yield return AutonomousAction(1, WinchDown);
+        yield return AutonomousAction(74, null);
+        yield return AutonomousAction(27, Move, Vector3.left);
+        yield return AutonomousAction(25, Move, Vector3.forward);
     }
 
     private IEnumerator RunBlueFrontAutonomous()
     {
-        yield return AutonomousAction(20, null);
-        yield return AutonomousAction(20, Move, Vector3.right);
+        yield return AutonomousAction(1, WinchDown);
         yield return AutonomousAction(10, null);
-        yield return AutonomousAction(55, Move, Vector3.forward);
+        yield return AutonomousAction(10, Move, Vector3.right);
         yield return AutonomousAction(10, null);
-        yield return AutonomousAction(50, Move, Vector3.right);
+        yield return AutonomousAction(28, Move, Vector3.forward);
+        yield return AutonomousAction(10, null);
+        yield return AutonomousAction(24, Move, Vector3.right);
         yield return AutonomousAction(1, WinchUp);
         yield return AutonomousAction(74, null);
         yield return AutonomousAction(125, SetElevatorStage, ElevatorStage.Stage2);
-        yield return AutonomousAction(60, null); // Bucket Down
-        yield return AutonomousAction(20, null); // Bucket Up
+        yield return AutonomousAction(1, BucketDown);
+        yield return AutonomousAction(59, null);
+        yield return AutonomousAction(1, BucketUp);
         yield return AutonomousAction(125, SetElevatorStage, ElevatorStage.Stage0);
         yield return AutonomousAction(1, WinchDown);
         yield return AutonomousAction(74, null);
-        yield return AutonomousAction(47, Move, Vector3.right);
-        yield return AutonomousAction(43, Move, Vector3.forward);
+        yield return AutonomousAction(25, Move, Vector3.right);
+        yield return AutonomousAction(25, Move, Vector3.forward);
     }
 
 
@@ -519,7 +512,7 @@ public class YNotRobots6780 : _BaseRobot
 
         void RotateBucketToRotation(float rotation)
         {
-            bucketRotation = Mathf.Lerp(startBucketRotation, rotation, Mathf.Abs(rotation - startBucketRotation) / 30f * (float)(elapsedBucketRotationTime / BUCKET_ROTATION_TIME));
+            bucketRotation = Mathf.Lerp(startBucketRotation, rotation, elapsedBucketRotationTime / BUCKET_ROTATION_TIME * (Mathf.Abs(rotation - startBucketRotation) / 30f));
             bucketHinge.forward = Quaternion.AngleAxis(bucketRotation, elevatorHinge.right) * elevatorHinge.forward;
         }
     }

@@ -91,16 +91,16 @@ public class AutonomousRoundManager : MonoBehaviour
                 switch (startingSpot)
                 {
                     case StartingSpot.RedFront:
-                        PositionRobotAndPixel(spawnedRobot, robotStartPositionList[i].redFront, redFrontStartPositionParent);
+                        PositionRobotAndPixel(spawnedRobot, robotStartPositionList[i].redFront, transform.parent.parent, redFrontStartPositionParent);
                         break;
                     case StartingSpot.RedBack:
-                        PositionRobotAndPixel(spawnedRobot, robotStartPositionList[i].redBack, redBackStartPositionParent);
+                        PositionRobotAndPixel(spawnedRobot, robotStartPositionList[i].redBack, transform.parent.parent, redBackStartPositionParent);
                         break;
                     case StartingSpot.BlueFront:
-                        PositionRobotAndPixel(spawnedRobot, robotStartPositionList[i].blueFront, blueFrontStartPositionParent);
+                        PositionRobotAndPixel(spawnedRobot, robotStartPositionList[i].blueFront, transform.parent.parent, blueFrontStartPositionParent);
                         break;
                     case StartingSpot.BlueBack:
-                        PositionRobotAndPixel(spawnedRobot, robotStartPositionList[i].blueBack, blueBackStartPositionParent);
+                        PositionRobotAndPixel(spawnedRobot, robotStartPositionList[i].blueBack, transform.parent.parent, blueBackStartPositionParent);
                         break;
                 }
             }
@@ -110,24 +110,27 @@ public class AutonomousRoundManager : MonoBehaviour
 
         return;
 
-        void PositionRobotAndPixel(_BaseRobot robot, AutonomousStartPositionScriptableObject.StartingSpot startingSpot, Transform parent)
+        void PositionRobotAndPixel(_BaseRobot robot, AutonomousStartPositionScriptableObject.StartingSpot startingSpot, Transform parent, Transform spawnOffset)
         {
-            robot.transform.parent = parent;
+            robot.transform.parent = spawnOffset;
             robot.transform.localPosition = startingSpot.position;
             robot.transform.localRotation = startingSpot.rotation;
 
             if (startingSpot.yellowPixel.usePixel)
             {
-                Transform yellowPixel = Instantiate(yellowPixelPrefab, parent).transform;
+                Transform yellowPixel = Instantiate(yellowPixelPrefab, spawnOffset).transform;
                 yellowPixel.localPosition = startingSpot.yellowPixel.pixelPosition;
                 yellowPixel.localRotation = startingSpot.yellowPixel.pixelRotation;
+                yellowPixel.parent = parent;
             }
             if (startingSpot.purplePixel.usePixel)
             {
-                Transform purplePixel = Instantiate(purplePixelPrefab, parent).transform;
+                Transform purplePixel = Instantiate(purplePixelPrefab, spawnOffset).transform;
                 purplePixel.localPosition= startingSpot.purplePixel.pixelPosition;
                 purplePixel.localRotation = startingSpot.purplePixel.pixelRotation;
+                purplePixel.parent = parent;
             }
+            robot.transform.parent = parent;
         }
     }
 

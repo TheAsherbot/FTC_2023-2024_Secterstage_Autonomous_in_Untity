@@ -18,12 +18,12 @@ MonoBehaviour:
     position: {x: -0.09, y: -0.1, z: 0}
     rotation: {x: 0, y: 180, z: 0, w: 0}
     yellowPixel:
-      usePixel: 0
-      pixelPosition: {x: -0.1, y: -0.1, z: -0.15}
+      usePixel: 1
+      pixelPosition: {x: -0.03, y: -0.075, z: -0.1}
       pixelRotation: {x: 0, y: 0, z: 0, w: 0}
     purplePixel:
-      usePixel: 0
-      pixelPosition: {x: -0.1, y: -0.98, z: -0.15}
+      usePixel: 1
+      pixelPosition: {x: -0.15, y: -0.075, z: -0.1}
       pixelRotation: {x: 0, y: 0, z: 0, w: 0}
   redBack:
     position: {x: -0.1, y: -0.1, z: 0.085}
@@ -40,21 +40,21 @@ MonoBehaviour:
     position: {x: 0.1, y: -0.1, z: 0}
     rotation: {x: 0, y: 180, z: 0, w: 0}
     yellowPixel:
-      usePixel: 0
-      pixelPosition: {x: 0.1, y: -0.1, z: -0.15}
+      usePixel: 1
+      pixelPosition: {x: 0.15, y: -0.075, z: -0.025}
       pixelRotation: {x: 0, y: 0, z: 0, w: 0}
     purplePixel:
-      usePixel: 0
-      pixelPosition: {x: 0.1, y: -0.98, z: -0.15}
+      usePixel: 1
+      pixelPosition: {x: 0.05, y: -0.075, z: -0.025}
       pixelRotation: {x: 0, y: 0, z: 0, w: 0}
   blueBack:
     position: {x: 0.1, y: -0.1, z: 0.085}
     rotation: {x: 0, y: 180, z: 0, w: 0}
     yellowPixel:
-      usePixel: 0
-      pixelPosition: {x: 0, y: -0.1, z: -0.175}
+      usePixel: 1
+      pixelPosition: {x: 0.15, y: -0.075, z: -0.01}
       pixelRotation: {x: 0, y: 0, z: 0, w: 0}
     purplePixel:
-      usePixel: 0
-      pixelPosition: {x: 0, y: -0.98, z: -0.175}
+      usePixel: 1
+      pixelPosition: {x: 0.05, y: -0.075, z: -0.01}
       pixelRotation: {x: 0, y: 0, z: 0, w: 0}
