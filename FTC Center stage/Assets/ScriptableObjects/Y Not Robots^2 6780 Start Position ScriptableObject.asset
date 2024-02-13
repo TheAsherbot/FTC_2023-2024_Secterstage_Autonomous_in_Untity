@@ -16,7 +16,7 @@ MonoBehaviour:
   robotPrefab: {fileID: 9063269136645999756, guid: ffe13241335a19842bdbf8afe1e320e2, type: 3}
   redFront:
     position: {x: -0.09, y: -0.1, z: 0}
-    rotation: {x: 0, y: 180, z: 0, w: 0}
+    rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
     yellowPixel:
       usePixel: 1
       pixelPosition: {x: -0.03, y: -0.075, z: -0.1}
@@ -25,9 +25,19 @@ MonoBehaviour:
       usePixel: 1
       pixelPosition: {x: -0.15, y: -0.075, z: -0.1}
       pixelRotation: {x: 0, y: 0, z: 0, w: 0}
+    redTeamProp:
+      useProp: 0
+      teamProp: {fileID: 0}
+      propOffset: {x: 0, y: 0, z: 0}
+      propRotation: {x: 0, y: 0, z: 0, w: 0}
+    blueTeamProp:
+      useProp: 0
+      teamProp: {fileID: 0}
+      propOffset: {x: 0, y: 0, z: 0}
+      propRotation: {x: 0, y: 0, z: 0, w: 0}
   redBack:
     position: {x: -0.1, y: -0.1, z: 0.085}
-    rotation: {x: 0, y: 180, z: 0, w: 0}
+    rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
     yellowPixel:
       usePixel: 1
       pixelPosition: {x: -0.035, y: -0.085, z: 0}
@@ -36,9 +46,19 @@ MonoBehaviour:
       usePixel: 1
       pixelPosition: {x: -0.15, y: -0.085, z: 0}
       pixelRotation: {x: 0, y: 0, z: 0, w: 0}
+    redTeamProp:
+      useProp: 0
+      teamProp: {fileID: 0}
+      propOffset: {x: 0, y: 0, z: 0}
+      propRotation: {x: 0, y: 0, z: 0, w: 0}
+    blueTeamProp:
+      useProp: 0
+      teamProp: {fileID: 0}
+      propOffset: {x: 0, y: 0, z: 0}
+      propRotation: {x: 0, y: 0, z: 0, w: 0}
   blueFront:
     position: {x: 0.1, y: -0.1, z: 0}
-    rotation: {x: 0, y: 180, z: 0, w: 0}
+    rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
     yellowPixel:
       usePixel: 1
       pixelPosition: {x: 0.15, y: -0.075, z: -0.025}
@@ -47,9 +67,19 @@ MonoBehaviour:
       usePixel: 1
       pixelPosition: {x: 0.05, y: -0.075, z: -0.025}
       pixelRotation: {x: 0, y: 0, z: 0, w: 0}
+    redTeamProp:
+      useProp: 0
+      teamProp: {fileID: 0}
+      propOffset: {x: 0, y: 0, z: 0}
+      propRotation: {x: 0, y: 0, z: 0, w: 0}
+    blueTeamProp:
+      useProp: 0
+      teamProp: {fileID: 0}
+      propOffset: {x: 0, y: 0, z: 0}
+      propRotation: {x: 0, y: 0, z: 0, w: 0}
   blueBack:
     position: {x: 0.1, y: -0.1, z: 0.085}
-    rotation: {x: 0, y: 180, z: 0, w: 0}
+    rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
     yellowPixel:
       usePixel: 1
       pixelPosition: {x: 0.15, y: -0.075, z: -0.01}
@@ -58,3 +88,13 @@ MonoBehaviour:
       usePixel: 1
       pixelPosition: {x: 0.05, y: -0.075, z: -0.01}
       pixelRotation: {x: 0, y: 0, z: 0, w: 0}
+    redTeamProp:
+      useProp: 0
+      teamProp: {fileID: 0}
+      propOffset: {x: 0, y: 0, z: 0}
+      propRotation: {x: 0, y: 0, z: 0, w: 0}
+    blueTeamProp:
+      useProp: 0
+      teamProp: {fileID: 0}
+      propOffset: {x: 0, y: 0, z: 0}
+      propRotation: {x: 0, y: 0, z: 0, w: 0}

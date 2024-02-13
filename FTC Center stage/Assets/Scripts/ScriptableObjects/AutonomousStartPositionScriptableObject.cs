@@ -16,12 +16,23 @@ public class AutonomousStartPositionScriptableObject : ScriptableObject
             public Quaternion pixelRotation;
         }
 
+        [Serializable]
+        public struct TeamProp
+        {
+            public bool useProp;
+            public GameObject teamProp;
+            public Vector3 propOffset;
+            public Quaternion propRotation;
+        }
+
 
         public Vector3 position;
         public Quaternion rotation;
 
         public Pixel yellowPixel;
         public Pixel purplePixel;
+        public TeamProp redTeamProp;
+        public TeamProp blueTeamProp;
     }
 
 

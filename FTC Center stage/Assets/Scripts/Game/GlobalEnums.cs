@@ -1,4 +1,9 @@
-
+public enum SpikeMarkSpot
+{
+    Left,
+    Middle,
+    Right,
+}
 
 public enum Alliances
 {

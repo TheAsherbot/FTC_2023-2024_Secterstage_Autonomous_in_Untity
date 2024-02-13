@@ -6,8 +6,6 @@ using UnityEngine;
 public class AutonomousRoundManager : MonoBehaviour
 {
 
-    
-
 
     private const int MAX_ROUND_TIME = 30;
 
@@ -15,15 +13,20 @@ public class AutonomousRoundManager : MonoBehaviour
     public event Action OnRoundFinished;
 
 
+    [SerializeField] private Transform objectParent;
+
+
     [Header("Prefabs")]
+    [SerializeField] private GameObject whitePixelPrefab;
     [SerializeField] private GameObject yellowPixelPrefab;
     [SerializeField] private GameObject purplePixelPrefab;
 
+
     [Header("Robot start Positions")]
-    [SerializeField] private Transform redBackStartPositionParent;
-    [SerializeField] private Transform redFrontStartPositionParent;
-    [SerializeField] private Transform blueBackStartPositionParent;
-    [SerializeField] private Transform blueFrontStartPositionParent;
+    [SerializeField] private Transform redBackStartPositionOffset;
+    [SerializeField] private Transform redFrontStartPositionOffset;
+    [SerializeField] private Transform blueBackStartPositionOffset;
+    [SerializeField] private Transform blueFrontStartPositionOffset;
     [SerializeField] private Robot robot1;
     [SerializeField] private Robot robot2;
     [SerializeField] private Robot robot3;
@@ -33,6 +36,9 @@ public class AutonomousRoundManager : MonoBehaviour
     private double elapsedTime = 0;
     private bool isRoundFinished = false;
 
+    private SpikeMarkSpot spikeMarkSpot;
+
+    private bool startNewRound;
 
 
 
@@ -41,20 +47,35 @@ public class AutonomousRoundManager : MonoBehaviour
         StartRound();
     }
 
-    public void StartRound()
+    private void StartRound()
     {
+        foreach (Transform child in objectParent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+
         Time.timeScale = 1;
         elapsedTime = 0;
         isRoundFinished = false;
 
-        StartRobot(robot1, StartingSpot.RedBack);
-        StartRobot(robot2, StartingSpot.RedFront);
-        StartRobot(robot3, StartingSpot.BlueBack);
-        StartRobot(robot4, StartingSpot.BlueFront);
+        spikeMarkSpot = (SpikeMarkSpot)UnityEngine.Random.Range(0, 3);
+
+        StartRobot(robot1, StartingSpot.RedBack, spikeMarkSpot, true);
+        StartRobot(robot2, StartingSpot.RedFront, spikeMarkSpot, true);
+        StartRobot(robot3, StartingSpot.BlueBack, spikeMarkSpot, false);
+        StartRobot(robot4, StartingSpot.BlueFront, spikeMarkSpot, false);
     }
 
     private void Update()
     {
+        if (startNewRound)
+        {
+            startNewRound = false;
+            StartRound();
+            return;
+        }
+
         if (!isRoundFinished)
         {
             elapsedTime += Time.deltaTime;
@@ -79,28 +100,35 @@ public class AutonomousRoundManager : MonoBehaviour
         return elapsedTime;
     }
 
-    private void StartRobot(Robot robot, StartingSpot startingSpot)
+    private void StartRobot(Robot robot, StartingSpot startingSpot, SpikeMarkSpot spikeMarkSpot, bool isRedTeam)
     {
         for (int i = 0; i < robotStartPositionList.Count; i++)
         {
             if (robotStartPositionList[i].robot == robot)
             {
-                _BaseRobot spawnedRobot = Instantiate(robotStartPositionList[i].robotPrefab).GetComponent<_BaseRobot>();
+                _BaseRobot spawnedRobot = Instantiate(robotStartPositionList[i].robotPrefab);
 
+                spawnedRobot.gameObject.tag = isRedTeam ? "Red Robot" : "Blue Robot";
                 spawnedRobot.Trigger_OnPositionDecided(startingSpot);
+                spawnedRobot.Trigger_OnSpikeMarkDecided(spikeMarkSpot);
+
                 switch (startingSpot)
                 {
                     case StartingSpot.RedFront:
-                        PositionRobotAndPixel(spawnedRobot, robotStartPositionList[i].redFront, transform.parent.parent, redFrontStartPositionParent);
+                        PositionRobotAndPixel(spawnedRobot, robotStartPositionList[i].redFront, redFrontStartPositionOffset);
+                        PositionTeamProp(robotStartPositionList[i].redFront, isRedTeam, redFrontStartPositionOffset, spikeMarkSpot);
                         break;
                     case StartingSpot.RedBack:
-                        PositionRobotAndPixel(spawnedRobot, robotStartPositionList[i].redBack, transform.parent.parent, redBackStartPositionParent);
+                        PositionRobotAndPixel(spawnedRobot, robotStartPositionList[i].redBack, redBackStartPositionOffset);
+                        PositionTeamProp(robotStartPositionList[i].redBack, isRedTeam, redBackStartPositionOffset, spikeMarkSpot);
                         break;
                     case StartingSpot.BlueFront:
-                        PositionRobotAndPixel(spawnedRobot, robotStartPositionList[i].blueFront, transform.parent.parent, blueFrontStartPositionParent);
+                        PositionRobotAndPixel(spawnedRobot, robotStartPositionList[i].blueFront, blueFrontStartPositionOffset);
+                        PositionTeamProp(robotStartPositionList[i].blueFront, isRedTeam, blueFrontStartPositionOffset, spikeMarkSpot);
                         break;
                     case StartingSpot.BlueBack:
-                        PositionRobotAndPixel(spawnedRobot, robotStartPositionList[i].blueBack, transform.parent.parent, blueBackStartPositionParent);
+                        PositionRobotAndPixel(spawnedRobot, robotStartPositionList[i].blueBack, blueBackStartPositionOffset);
+                        PositionTeamProp(robotStartPositionList[i].blueBack, isRedTeam, blueBackStartPositionOffset, spikeMarkSpot);
                         break;
                 }
             }
@@ -110,7 +138,7 @@ public class AutonomousRoundManager : MonoBehaviour
 
         return;
 
-        void PositionRobotAndPixel(_BaseRobot robot, AutonomousStartPositionScriptableObject.StartingSpot startingSpot, Transform parent, Transform spawnOffset)
+        void PositionRobotAndPixel(_BaseRobot robot, AutonomousStartPositionScriptableObject.StartingSpot startingSpot, Transform spawnOffset)
         {
             robot.transform.parent = spawnOffset;
             robot.transform.localPosition = startingSpot.position;
@@ -121,20 +149,76 @@ public class AutonomousRoundManager : MonoBehaviour
                 Transform yellowPixel = Instantiate(yellowPixelPrefab, spawnOffset).transform;
                 yellowPixel.localPosition = startingSpot.yellowPixel.pixelPosition;
                 yellowPixel.localRotation = startingSpot.yellowPixel.pixelRotation;
-                yellowPixel.parent = parent;
+                yellowPixel.parent = objectParent;
             }
             if (startingSpot.purplePixel.usePixel)
             {
                 Transform purplePixel = Instantiate(purplePixelPrefab, spawnOffset).transform;
                 purplePixel.localPosition= startingSpot.purplePixel.pixelPosition;
                 purplePixel.localRotation = startingSpot.purplePixel.pixelRotation;
-                purplePixel.parent = parent;
+                purplePixel.parent = objectParent;
             }
-            robot.transform.parent = parent;
+            robot.transform.parent = objectParent;
+        }
+        void PositionTeamProp(AutonomousStartPositionScriptableObject.StartingSpot startingSpot, bool isOnRedTeam, Transform positionOffset, SpikeMarkSpot spikeMarkSpot)
+        {
+            if (isOnRedTeam)
+            {
+                if (startingSpot.redTeamProp.useProp)
+                {
+                    GameObject teamProp = Instantiate(startingSpot.redTeamProp.teamProp);
+                    PositionSpikeMarkIndicator(teamProp.transform);
+                    teamProp.transform.parent = objectParent;
+                }
+                else
+                {
+                    GameObject whitePixel = SpawnWhitePixel();
+                    PositionSpikeMarkIndicator(whitePixel.transform);
+                    whitePixel.transform.parent = objectParent;
+                }
+            }
+            else
+            {
+                if (startingSpot.blueTeamProp.useProp)
+                {
+                    GameObject teamProp = Instantiate(startingSpot.blueTeamProp.teamProp);
+                    PositionSpikeMarkIndicator(teamProp.transform);
+                    teamProp.transform.parent = objectParent;
+                }
+                else
+                {
+                    GameObject whitePixel = SpawnWhitePixel();
+                    PositionSpikeMarkIndicator(whitePixel.transform);
+                    whitePixel.transform.parent = objectParent;
+                }
+            }
+
+            GameObject SpawnWhitePixel()
+            {
+                return Instantiate(whitePixelPrefab);
+            }
+            void PositionSpikeMarkIndicator(Transform indicator)
+            {
+                switch (spikeMarkSpot)
+                {
+                    case SpikeMarkSpot.Left:
+                        indicator.position = positionOffset.GetChild(0).GetChild(0).position;
+                        break;
+                    case SpikeMarkSpot.Middle:
+                        indicator.position = positionOffset.GetChild(0).GetChild(1).position;
+                        break;
+                    case SpikeMarkSpot.Right:
+                        indicator.position = positionOffset.GetChild(0).GetChild(2).position;
+                        break;
+                }
+            }
         }
     }
 
 
-
+    public void StartNewRound()
+    {
+        startNewRound = true;
+    }
 
 }

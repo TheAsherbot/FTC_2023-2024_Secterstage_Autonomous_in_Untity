@@ -17,6 +17,7 @@ public class RedBackstage : Backdrop
         }
         else if (other.tag == RED_ROBOT_TAG)
         {
+            Debug.Log("YES");
             scoreManager.OnRedRobotEnterBackstage?.Invoke();
         }
     }

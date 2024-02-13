@@ -94,7 +94,7 @@ public class YNotRobots6780 : _BaseRobot
 
 
 
-    private async void Awake()
+    private void Awake()
     {
         OnPositionDecided += PushBot_OnPositionDecided;
 
@@ -103,12 +103,20 @@ public class YNotRobots6780 : _BaseRobot
 
 
         intakeTrigger.OnTrigger += OnIntakeTrigger;
-        
+
+        StartCoroutine(Delay());
 
 
-        await Task.Delay(250);
 
-        startY = transform.position.y;
+        IEnumerator Delay()
+        {
+            yield return new WaitForSeconds(2.5f);
+
+            if (transform != null)
+            {
+                startY = transform.position.y;
+            }
+        }
     }
 
 
@@ -120,8 +128,6 @@ public class YNotRobots6780 : _BaseRobot
     private void Update()
     {
         velocity = rigidbody.velocity;
-
-        if (Input.GetKeyDown(KeyCode.K)) isIntakeMovingDown = true;
 
         MoveElevator();
         RotateElevator();
@@ -231,7 +237,6 @@ public class YNotRobots6780 : _BaseRobot
 
     private IEnumerator RunRedBackAutonomous()
     {
-        yield return AutonomousAction(1, WinchDown);
         yield return AutonomousAction(850, null);
         yield return AutonomousAction(10, Move, Vector3.left);
         yield return AutonomousAction(10, null);
@@ -253,7 +258,6 @@ public class YNotRobots6780 : _BaseRobot
 
     private IEnumerator RunRedFrontAutonomous()
     {
-        yield return AutonomousAction(1, WinchDown);
         yield return AutonomousAction(10, null);
         yield return AutonomousAction(10, Move, Vector3.left);
         yield return AutonomousAction(10, null);
@@ -275,7 +279,6 @@ public class YNotRobots6780 : _BaseRobot
 
     private IEnumerator RunBlueBackAutonomous()
     {
-        yield return AutonomousAction(1, WinchDown);
         yield return AutonomousAction(850, null);
         yield return AutonomousAction(10, Move, Vector3.right);
         yield return AutonomousAction(10, null);
@@ -297,7 +300,6 @@ public class YNotRobots6780 : _BaseRobot
 
     private IEnumerator RunBlueFrontAutonomous()
     {
-        yield return AutonomousAction(1, WinchDown);
         yield return AutonomousAction(10, null);
         yield return AutonomousAction(10, Move, Vector3.right);
         yield return AutonomousAction(10, null);
